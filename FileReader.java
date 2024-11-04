@@ -18,12 +18,14 @@ public class FileReader {
         }
         while (sc.hasNext()) {
             String s = sc.nextLine();
-            wordLengths[s.length()]+=1;
-            count++;    
+            if(checkString(s)){
+                wordLengths[s.length()]+=1;
+                count++;
+            }
         }
         sc.close();
-        System.out.println("linecount: "+count);
-        System.out.print(Arrays.toString(wordLengths));
+        //System.out.println("linecount: "+count);
+        //System.out.print(Arrays.toString(wordLengths));
         wordList = new String[count];
         count = 0;
         try{
@@ -32,9 +34,19 @@ public class FileReader {
             sc = new Scanner("words.txt");
         }
         while (sc.hasNext()) {
-            wordList[count] = sc.nextLine().toLowerCase();
-            count++;
+            String s = sc.nextLine().toLowerCase();
+            if(checkString(s)){
+                wordList[count] = s;
+                count++;
+            }
         }
+    }
+
+    public boolean checkString(String s){
+        if(s.contains(".")||s.contains("-")||s.contains(",")||s.contains("'")||s.contains("/")){
+            return false;
+        }
+        return true;
     }
 
     public String[] getWordsOfLength(int length){
