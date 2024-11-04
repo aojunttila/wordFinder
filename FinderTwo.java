@@ -1,19 +1,20 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-//17468444444 hours
-//1994114 years
+//converted strings to binary and added cancelling if doubles were found early
 
-public class FinderOne {
+public class FinderTwo {
     private static final int WORDLENGTH = 5;
     String[]words;
-    public FinderOne(){
+    int[]binaryWords;
+    public FinderTwo(){
         FileReader f = new FileReader();
         words = f.getWordsOfLength(WORDLENGTH);
         System.out.println(words.length);
         words = removeDuplicateLetters(words);
         System.out.println(words.length);
-        search();
+        System.out.println(stringToBin(words[0]));
+        //search();
     }
 
     public String[] removeDuplicateLetters(String[]s){
@@ -68,8 +69,12 @@ public class FinderOne {
         return true;
     }
 
+    public int (){
+
+    }
+
     public static void main(String[] args) {
-        new FinderOne();
+        new FinderTwo();
     }
     
 }
