@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class FinderTwo {
     private static final int WORDLENGTH = 5;
     String[]words;
-    int[]binaryWords;
+    int[]bin;
     private HashMap<Character,Integer>cMap;
     public FinderTwo(){
         cMap = new LetterMap().getMap();
@@ -16,12 +16,12 @@ public class FinderTwo {
         System.out.println(words.length);
         words = removeDuplicateLetters(words);
         System.out.println(words.length);
-        binaryWords = new int[words.length];
+        bin = new int[words.length];
         for(int i=0;i<words.length;i++){
-            binaryWords[i]=stringToBin(words[i]);
+            bin[i]=stringToBin(words[i]);
         }
         System.out.println(stringToBin(words[0]));
-        //search();
+        search();
     }
 
     public String[] removeDuplicateLetters(String[]s){
@@ -41,22 +41,40 @@ public class FinderTwo {
         return stringList.toArray(new String[0]);
     }
 
+    int temp = 0;
     public void search(){
-        String[]tempList = new String[5];
-        for(int a=0;a<words.length;a++){
-            System.out.println(a);
-            tempList[0]=words[a];
-            for(int b=0;b<words.length;b++){
-                System.out.println(b);
-                tempList[1]=words[b];
-                for(int c=0;c<words.length;c++){
-                    System.out.println(c);
-                    tempList[2]=words[c];
-                    for(int d=0;d<words.length;d++){
-                        tempList[3]=words[d];
-                        for(int e=0;e<words.length;e++){
-                            tempList[4]=words[e];
-                            checkDuplicates(tempList);
+        temp = 0;
+        for(int a=0;a<bin.length;a++){
+            temp = bin[a];
+            //System.out.println("a");
+            for(int b=0;b<bin.length;b++){
+                if((temp&bin[b])!=0){
+                    continue;
+                }
+                //System.out.println("b");
+                temp = bin[a]+bin[b];
+                for(int c=0;c<bin.length;c++){
+                    if((temp&bin[c])!=0){
+                        //System.out.println(temp);
+                        //System.out.println(words[a]+" "+words[b]+" "+words[c]);
+                        continue;
+                    }
+                    //System.out.println("c");
+                    temp = bin[a]+bin[b]+bin[c];
+                    for(int d=0;d<bin.length;d++){
+                        if((temp&bin[d])!=0){
+                            
+                            continue;
+                        }
+                        temp = bin[a]+bin[b]+bin[c]+bin[d];
+                        for(int e=0;e<bin.length;e++){
+                            //System.out.println((temp&bin[e]));
+                            if((temp&bin[e])!=0){
+                                //System.out.println(words[a]+" "+words[b]+" "+words[c]+" "+words[d]+" "+words[e]);
+                                continue;
+                            }
+                            temp = bin[a]+bin[b]+bin[c]+bin[d]+bin[e];
+                            System.out.println(words[a]+" "+words[b]+" "+words[c]+" "+words[d]+" "+words[e]);
                         }
                     }
                 }
@@ -80,7 +98,7 @@ public class FinderTwo {
     public int stringToBin(String s){
         int t=0;
         for(int i=0;i<s.length();i++){
-            System.out.println(s.charAt(i));
+            //System.out.println(s.charAt(i));
             t+=cMap.get(s.charAt(i));
         }
         return t;
