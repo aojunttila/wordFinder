@@ -43,7 +43,9 @@ public class FileReader {
     }
 
     public boolean checkString(String s){
-        if(s.contains(".")||s.contains("-")||s.contains(",")||s.contains("'")||s.contains("/")){
+        if(s.contains(".")||s.contains("-")||s.contains(",")||s.contains("'")||s.contains("/")||
+        s.contains("3")||s.contains("1")||s.contains("0")||s.contains("'")||s.contains("/")||
+        s.contains(".")||s.contains("-")||s.contains(",")||s.contains("'")||s.contains("/")){
             return false;
         }
         return true;

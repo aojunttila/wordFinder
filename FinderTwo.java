@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 //converted strings to binary and added cancelling if doubles were found early
 
@@ -7,12 +8,18 @@ public class FinderTwo {
     private static final int WORDLENGTH = 5;
     String[]words;
     int[]binaryWords;
+    private HashMap<Character,Integer>cMap;
     public FinderTwo(){
+        cMap = new LetterMap().getMap();
         FileReader f = new FileReader();
         words = f.getWordsOfLength(WORDLENGTH);
         System.out.println(words.length);
         words = removeDuplicateLetters(words);
         System.out.println(words.length);
+        binaryWords = new int[words.length];
+        for(int i=0;i<words.length;i++){
+            binaryWords[i]=stringToBin(words[i]);
+        }
         System.out.println(stringToBin(words[0]));
         //search();
     }
@@ -69,8 +76,14 @@ public class FinderTwo {
         return true;
     }
 
-    public int (){
-
+    String d = "abcdefghijklmnopqrstuvwxyz";
+    public int stringToBin(String s){
+        int t=0;
+        for(int i=0;i<s.length();i++){
+            System.out.println(s.charAt(i));
+            t+=cMap.get(s.charAt(i));
+        }
+        return t;
     }
 
     public static void main(String[] args) {
