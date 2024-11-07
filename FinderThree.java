@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 //converted strings to binary and added cancelling if doubles were found early
 
-//74999 seconds
-//20.8 hours
+//79.6 seconds
+//0.0219 hours
 
 public class FinderThree {
     private static final int WORDLENGTH = 5;
@@ -34,7 +34,7 @@ public class FinderThree {
             printAnswer(answerList[i]);
         }
         System.out.println(answerCount+" solutions found");
-        System.out.println(System.currentTimeMillis()-start);
+        System.out.println("Runtime: "+(System.currentTimeMillis()-start)+"ms");
     }
 
     public String[] removeDuplicateLetters(String[]s){
@@ -94,9 +94,10 @@ public class FinderThree {
 
     int temp = 0;
     int answerCount = 0;
-    int[][]answerList = new int[bin.length][];
+    int[][]answerList;
     public void search(){
         temp = 0;
+        answerList = new int[bin.length][];
         for(int a=0;a<bin.length;a++){
             if((a+1)%200==0||(a+1)==bin.length){
                 System.out.println((a+1)+"/"+bin.length);
@@ -122,6 +123,7 @@ public class FinderThree {
                                 continue;
                             }
                             answerList[answerCount]=new int[]{a,b,c,d,e};
+                            answerCount++;
                             
 
                         }
@@ -135,7 +137,7 @@ public class FinderThree {
         for(int i=0;i<indexList.length;i++){
             System.out.print(Arrays.toString(map.get(bin[indexList[i]]))+" ");
         }
-        System.out.println(",");
+        System.out.println("");
     }
 
     public boolean checkDuplicates(String[]temp){
