@@ -1,8 +1,10 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 //converted strings to binary and added cancelling if doubles were found early
+
+//74999 seconds
+//20.8 hours
 
 public class FinderTwo {
     private static final int WORDLENGTH = 5;
@@ -13,14 +15,14 @@ public class FinderTwo {
         cMap = new LetterMap().getMap();
         FileReader f = new FileReader();
         words = f.getWordsOfLength(WORDLENGTH);
-        System.out.println(words.length);
+        //System.out.println(words.length);
         words = removeDuplicateLetters(words);
         System.out.println(words.length);
         bin = new int[words.length];
         for(int i=0;i<words.length;i++){
             bin[i]=stringToBin(words[i]);
         }
-        System.out.println(stringToBin(words[0]));
+        //System.out.println(stringToBin(words[0]));
         search();
     }
 
@@ -43,37 +45,47 @@ public class FinderTwo {
 
     int temp = 0;
     public void search(){
+        long start = System.currentTimeMillis();
         temp = 0;
         for(int a=0;a<bin.length;a++){
-            temp = bin[a];
-            //System.out.println("a");
+            
+            System.out.println(a);
+            System.out.println(System.currentTimeMillis()-start);
             for(int b=0;b<bin.length;b++){
+                //System.out.println(b);
+                temp = bin[a];
                 if((temp&bin[b])!=0){
                     continue;
                 }
                 //System.out.println("b");
-                temp = bin[a]+bin[b];
+                
                 for(int c=0;c<bin.length;c++){
+                    temp = bin[a]+bin[b];
                     if((temp&bin[c])!=0){
                         //System.out.println(temp);
                         //System.out.println(words[a]+" "+words[b]+" "+words[c]);
                         continue;
                     }
                     //System.out.println("c");
-                    temp = bin[a]+bin[b]+bin[c];
+                    
                     for(int d=0;d<bin.length;d++){
+                        temp = bin[a]+bin[b]+bin[c];
                         if((temp&bin[d])!=0){
                             
                             continue;
                         }
-                        temp = bin[a]+bin[b]+bin[c]+bin[d];
+                        
                         for(int e=0;e<bin.length;e++){
+                            temp = bin[a]+bin[b]+bin[c]+bin[d];
                             //System.out.println((temp&bin[e]));
+                            //temp = stringToBin("glentjumpyvozhdwaqfs");
+                            
                             if((temp&bin[e])!=0){
+                                
                                 //System.out.println(words[a]+" "+words[b]+" "+words[c]+" "+words[d]+" "+words[e]);
                                 continue;
                             }
-                            temp = bin[a]+bin[b]+bin[c]+bin[d]+bin[e];
+                            //temp = bin[a]+bin[b]+bin[c]+bin[d]+bin[e];
                             System.out.println(words[a]+" "+words[b]+" "+words[c]+" "+words[d]+" "+words[e]);
                         }
                     }

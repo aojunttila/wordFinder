@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
-//17468444444 hours
-//1994114 years
+//62,886,400,000,000 seconds
+//17,468,444,444 hours
+//1,994,114 years
 
 public class FinderOne {
     private static final int WORDLENGTH = 5;
